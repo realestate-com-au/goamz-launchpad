@@ -4,12 +4,13 @@ package iam
 
 import (
 	"encoding/xml"
-	"launchpad.net/goamz/aws"
 	"net/http"
 	"net/url"
 	"strconv"
 	"strings"
 	"time"
+
+	"launchpad.net/goamz/aws"
 )
 
 // The IAM type encapsulates operations operations with the IAM endpoint.
@@ -123,6 +124,23 @@ func (iam *IAM) CreateUser(name, path string) (*CreateUserResp, error) {
 		"UserName": name,
 	}
 	resp := new(CreateUserResp)
+	if err := iam.query(params, resp); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+// Response to a ListAccountAliases request
+type AccountAliasesResp struct {
+	RequestId string   `xml:"ResponseMetadata>RequestId"`
+	Aliases   []string `xml:"ListAccountAliasesResult>AccountAliases>member"`
+}
+
+func (iam *IAM) ListAccountAliases() (*AccountAliasesResp, error) {
+	params := map[string]string{
+		"Action": "ListAccountAliases",
+	}
+	resp := new(AccountAliasesResp)
 	if err := iam.query(params, resp); err != nil {
 		return nil, err
 	}
