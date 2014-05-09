@@ -283,10 +283,11 @@ type CreateAccessKeyResp struct {
 //
 // See http://goo.gl/LHgZR for more details.
 type AccessKey struct {
-	UserName string
-	Id       string `xml:"AccessKeyId"`
-	Secret   string `xml:"SecretAccessKey,omitempty"`
-	Status   string
+	UserName   string
+	Id         string `xml:"AccessKeyId"`
+	CreateDate string `xml:"CreateDate"`
+	Secret     string `xml:"SecretAccessKey,omitempty"`
+	Status     string
 }
 
 // CreateAccessKey creates a new access key in IAM.
