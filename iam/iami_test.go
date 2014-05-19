@@ -1,11 +1,12 @@
 package iam_test
 
 import (
-	"launchpad.net/goamz/aws"
-	"launchpad.net/goamz/iam"
-	"launchpad.net/goamz/testutil"
-	. "launchpad.net/gocheck"
 	"net/url"
+
+	"github.com/realestate-com-au/goamz/aws"
+	"github.com/realestate-com-au/goamz/iam"
+	"github.com/realestate-com-au/goamz/testutil"
+	. "launchpad.net/gocheck"
 )
 
 // AmazonServer represents an Amazon AWS server.

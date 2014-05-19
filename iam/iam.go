@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"launchpad.net/goamz/aws"
+	"github.com/realestate-com-au/goamz/aws"
 )
 
 // The IAM type encapsulates operations operations with the IAM endpoint.

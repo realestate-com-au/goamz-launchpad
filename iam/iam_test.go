@@ -1,12 +1,13 @@
 package iam_test
 
 import (
-	"launchpad.net/goamz/aws"
-	"launchpad.net/goamz/iam"
-	"launchpad.net/goamz/testutil"
-	. "launchpad.net/gocheck"
 	"strings"
 	"testing"
+
+	"github.com/realestate-com-au/goamz/aws"
+	"github.com/realestate-com-au/goamz/iam"
+	"github.com/realestate-com-au/goamz/testutil"
+	. "launchpad.net/gocheck"
 )
 
 func Test(t *testing.T) {

@@ -1,11 +1,12 @@
 package aws_test
 
 import (
-	"launchpad.net/goamz/aws"
-	. "launchpad.net/gocheck"
 	"os"
 	"strings"
 	"testing"
+
+	"github.com/realestate-com-au/goamz/aws"
+	. "launchpad.net/gocheck"
 )
 
 func Test(t *testing.T) {
