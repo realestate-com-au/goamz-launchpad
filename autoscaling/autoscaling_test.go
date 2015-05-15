@@ -3,9 +3,9 @@ package autoscaling_test
 import (
 	"testing"
 
-	"github.com/mitchellh/goamz/autoscaling"
-	"github.com/mitchellh/goamz/aws"
-	"github.com/mitchellh/goamz/testutil"
+	"github.com/realestate-com-au/goamz/autoscaling"
+	"github.com/realestate-com-au/goamz/aws"
+	"github.com/realestate-com-au/goamz/testutil"
 	. "github.com/motain/gocheck"
 )
 

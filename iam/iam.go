@@ -4,7 +4,7 @@ package iam
 
 import (
 	"encoding/xml"
-	"github.com/mitchellh/goamz/aws"
+	"github.com/realestate-com-au/goamz/aws"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -134,6 +134,23 @@ func (iam *IAM) CreateUser(name, path string) (*CreateUserResp, error) {
 	return resp, nil
 }
 
+// Response to a ListAccountAliases request
+type AccountAliasesResp struct {
+	RequestId string   `xml:"ResponseMetadata>RequestId"`
+	Aliases   []string `xml:"ListAccountAliasesResult>AccountAliases>member"`
+}
+
+func (iam *IAM) ListAccountAliases() (*AccountAliasesResp, error) {
+	params := map[string]string{
+		"Action": "ListAccountAliases",
+	}
+	resp := new(AccountAliasesResp)
+	if err := iam.query(params, resp); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 // Response for GetUser requests.
 //
 // See http://goo.gl/ZnzRN for more details.
@@ -147,9 +164,12 @@ type GetUserResp struct {
 // See http://goo.gl/ZnzRN for more details.
 func (iam *IAM) GetUser(name string) (*GetUserResp, error) {
 	params := map[string]string{
-		"Action":   "GetUser",
-		"UserName": name,
+		"Action": "GetUser",
 	}
+	if name != "" {
+		params["UserName"] = name
+	}
+
 	resp := new(GetUserResp)
 	if err := iam.query(params, resp); err != nil {
 		return nil, err
@@ -268,10 +288,11 @@ type CreateAccessKeyResp struct {
 //
 // See http://goo.gl/LHgZR for more details.
 type AccessKey struct {
-	UserName string
-	Id       string `xml:"AccessKeyId"`
-	Secret   string `xml:"SecretAccessKey,omitempty"`
-	Status   string
+	UserName   string
+	Id         string `xml:"AccessKeyId"`
+	CreateDate string `xml:"CreateDate"`
+	Secret     string `xml:"SecretAccessKey,omitempty"`
+	Status     string
 }
 
 // CreateAccessKey creates a new access key in IAM.
